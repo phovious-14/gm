@@ -1,1 +1,1 @@
-# Xmtp-video-chatting
+# Xmtp-chatting
