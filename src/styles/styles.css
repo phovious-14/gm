@@ -162,12 +162,14 @@ h3 {
 .msgs-container {
   height: 87%;
   overflow: auto;
-  /* background-image: url('../assets/bg1.jpeg'); */
+  background-image: url('../assets/bg1.jpeg');
   object-fit: cover;
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y:scroll; 
   overflow-x:hidden;  
+  border-radius: 50px;
+  margin-top: -20px;
 }
 
 #style-4::-webkit-scrollbar-track
@@ -208,6 +210,7 @@ h3 {
   outline: none;
   font-size: 14px;
   border: 2px solid #e1e7ff;
+  margin-top: 30px;
 }
 
 .text-input2 {
@@ -267,8 +270,8 @@ h3 {
   max-width: 700px;
   padding: 14px 18px;
   margin: 6px 8px;
-  background-color: #4d7ffe;
-  color: #fff;
+  background-color: #fefefe;
+  color: #1b1b1b;
   font-size: 13px;
   border-radius: 16px 16px 0 16px;
   overflow-wrap: break-word;
@@ -333,4 +336,5 @@ span.other {
   flex-direction: row;
   padding: 10px;
   border-radius: 100px;
+  margin-top: 20px;
 }
