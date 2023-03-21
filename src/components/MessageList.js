@@ -1,8 +1,8 @@
 import React from "react";
 import useStreamMessages from "../hooks/useStreamMessages";
 import MessageCard from "./MessageCard";
-import VideoCard from "./VideoCard";
-
+import NftCard from "./NftCard";
+import PaymentCard from "./PaymentCard";
 const MessageList = ({ isNewMsg, convoMessages, selectedConvo }) => {
   
   useStreamMessages(selectedConvo);
@@ -12,9 +12,12 @@ const MessageList = ({ isNewMsg, convoMessages, selectedConvo }) => {
       <div className="mt-auto">
         {!isNewMsg &&
           convoMessages.map((msg) => {
-            // if((msg.content).slice(0,4) === '/b/b'){
-            //   return <VideoCard key={msg.id} msg={msg} />;
-            // }
+            if((msg.content).slice(0,4) === '/nft'){
+              return <NftCard key={msg.id} msg={msg} />;
+            }
+            else if((msg.content).split(":")[0] === "Transaction "){
+              return <PaymentCard key={msg.id} msg={msg} />;
+            }
             return <MessageCard key={msg.id} msg={msg} />;
           })}
       </div>

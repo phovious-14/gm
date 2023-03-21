@@ -16,7 +16,7 @@ const Container = () => {
       {
         state === 'people' 
         ? <People />
-        : <Nft />
+        : <Nft  />
       }
     </div>
   )

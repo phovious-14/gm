@@ -1,24 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { LivepeerConfig,
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import {
+  LivepeerConfig,
   createReactClient,
-  studioProvider,} from '@livepeer/react';
-
+  studioProvider,
+} from "@livepeer/react";
+import "antd/dist/reset.css";
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: '2df1219b-52f9-43bb-b5cb-bd8d7b9998a8',
-    }),
-  });
+    apiKey: "2df1219b-52f9-43bb-b5cb-bd8d7b9998a8",
+  }),
+});
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    
-    <LivepeerConfig client={livepeerClient}><App /></LivepeerConfig>
+    <LivepeerConfig client={livepeerClient}>
+      <App />
+    </LivepeerConfig>
   </React.StrictMode>
 );
 

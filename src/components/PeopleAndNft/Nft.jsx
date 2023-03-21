@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '../../contexts/WalletContext';
 
-function Nft(){
+const Nft = () => {
   const [nftLink , setLink] = useState();
-  const {walletAddress} = useContext(WalletContext)
+  const {walletAddress, linkToSend, setLinkToSend} = useContext(WalletContext)
 
   function filter(text){
     if(text.substring(0,7) == "ipfs://"){
@@ -16,10 +16,11 @@ function Nft(){
   }
 
   //This function will fetch nft associated with wallet address
-  function fetchNft(){
+  function fetchNft() {
     axios.get(`https://polygon-mainnet.g.alchemy.com/nft/v2/tWfzgDK4rYavJBX5syU_uOrlfraPJUCF/getNFTs/?owner=${walletAddress}`)
       .then((data)=>{
           setLink(data.data.ownedNfts);
+          console.log(data);
       })
   }
 
@@ -31,8 +32,9 @@ function Nft(){
   return(
     <div className='nft_container' id="style-4">
       {nftLink && nftLink.map((data) =>(
-        <div className='nft'>
-          <iframe src={filter(data.media[0].raw)} scrolling='no' marginHeight="0" marginWidth="0" allowfullscreen></iframe>
+        data.media[0].raw !== "" && <div className='nft'>
+           <img src={filter(data.media[0].raw)} onClick={(e)=>{setLinkToSend("/nft "+filter(data.media[0].raw))}} alt="" />
+          {/* <iframe src={filter(data.media[0].raw)} scrolling='no' marginHeight="0" marginWidth="0" allowfullscreen></iframe> */}
         </div>
       ))}
     </div>

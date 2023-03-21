@@ -13,7 +13,7 @@ const Sidebar = () => {
     <nav className="main-menu">
       <img src={logo} alt="" className="logo" />
       <ul>
-        <li>
+        <li style={{marginTop:"300px"}}>
           <Link to="/">
             <i class="fa bx bxs-dashboard fa-2x"></i>
             <span className="nav-text">Home</span>

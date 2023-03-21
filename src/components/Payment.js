@@ -17,18 +17,18 @@ export const sendUsdc = async (_amount) => {
     await tokenContract.approve(account, _amount); 
     const writen = await tokenContract.transfer(_receiver, ethers.utils.parseEther(_amount));
     console.log("Written" + writen.hash);
-
+    return writen.hash
 }
 
 export const sendToken = async(_cmd) =>{
     console.log("The command is : "+_cmd);
     const myArray = _cmd.split(" ");
     console.log(myArray);
-    if(myArray[1] === 'usdc'){
-        sendUsdc(myArray[2]);
+    if(myArray[2] === 'usdc'){
+        return sendUsdc(myArray[1]);
     }
-    if(myArray[1] === 'dai'){
-        sendDAI(myArray[2]);
+    if(myArray[2] === 'dai'){
+        return sendDAI(myArray[1]);
     }
 }
 
@@ -42,6 +42,6 @@ export const sendDAI = async (_amount) => {
     const tokenContract = new ethers.Contract(tokenAddress, abi2, signer);
     await tokenContract.approve(account, _amount); const writen = await tokenContract.transfer(_receiver, ethers.utils.parseEther(_amount));
     console.log("Written" + writen.hash);
-
+    return writen.hash
 }
 

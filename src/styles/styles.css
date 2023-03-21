@@ -162,7 +162,7 @@ h3 {
 .msgs-container {
   height: 87%;
   overflow: auto;
-  background-image: url('../assets/rodeo\ \(3\).png');
+  /* background-image: url('../assets/bg1.jpeg'); */
   object-fit: cover;
   background-size: cover;
   background-repeat: no-repeat;
@@ -271,6 +271,7 @@ h3 {
   color: #fff;
   font-size: 13px;
   border-radius: 16px 16px 0 16px;
+  overflow-wrap: break-word;
 }
 
 .otherBubble {
@@ -320,4 +321,16 @@ span.other {
 
 .text-input2:focus {
   border: 2px solid #e1e7ff;
+}
+
+.pay_span {
+  background-color: #f7f7f7;
+  color: gray;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+  border-radius: 100px;
 }

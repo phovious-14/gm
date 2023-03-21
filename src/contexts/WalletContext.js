@@ -8,6 +8,7 @@ export const WalletContextProvider = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [signer, setSigner] = useState(null);
   const [selectedConvo, setSelectedConvo] = useState(null);
+  const [linkToSend, setLinkToSend] = useState();
 
   const connectWallet = async () => {
     const instance = await web3Modal.connect();
@@ -59,7 +60,8 @@ export const WalletContextProvider = ({ children }) => {
         disconnectWallet,
         walletAddress,
         signer,
-        selectedConvo, setSelectedConvo
+        selectedConvo, setSelectedConvo,
+        linkToSend, setLinkToSend
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 import useSendMessage from "../hooks/useSendMessage";
 import Header from "./Header/Header";
@@ -15,48 +15,21 @@ import { WalletContext } from "../contexts/WalletContext";
 
 const Home = () => {
   const [providerState] = useContext(XmtpContext);
-  const {selectedConvo, setSelectedConvo} = useContext(WalletContext)
+  const {selectedConvo, setLinkToSend, linkToSend} = useContext(WalletContext)
   const { convoMessages, client } = providerState;
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
   useStreamConversations();
   const [isNewMsg, setIsNewMsg] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const reset = () => {
-    setSelectedConvo(null);
-    setIsNewMsg(false);
-    setErrorMsg("");
-    setMsgTxt("");
-  };
-
-  const checkIfOnNetwork = async (address) => {
-    return (await client?.canMessage(address)) || false;
-  };
-
-  const onInputBlur = async (newAddress) => {
-    if (!newAddress.startsWith("0x") || newAddress.length !== 42) {
-      setErrorMsg("Invalid address");
-    } else {
-      const isOnNetwork = await checkIfOnNetwork(newAddress)
-      if (!isOnNetwork) {
-        setErrorMsg("Address not on XMTP network");
-      } else {
-        setSelectedConvo(newAddress);
-        setErrorMsg("");
-      }
-    }
-  };
 
   const sendNewMessage = async () => {
-    if("/pay" == msgTxt.substring(0,4)){
-      sendToken(msgTxt);
-      sendMessage("Hey Check I sent you " + msgTxt.split(" ")[2] + "  " +msgTxt.split(" ")[1]);
-      setMsgTxt("");
-    }
-    else if("/nft" == msgTxt.substring(0,4)){ 
-      //write what msg to send
-
+    if("/pay" === msgTxt.substring(0,4)){
+      sendToken(msgTxt).then((data) => {
+        sendMessage("Hey, I paid you " + msgTxt.split(" ")[1] + "  " +msgTxt.split(" ")[2]);
+        sendMessage("Transaction :  https://goerli.etherscan.io/tx/"+data)
+        setMsgTxt("");
+      });
+      
     }
     else{
       sendMessage(msgTxt);
@@ -64,6 +37,13 @@ const Home = () => {
     }
     
   };
+
+  useEffect(()=>{
+    if(linkToSend){
+      setMsgTxt(linkToSend);
+      setLinkToSend("");
+    }
+  })
 
   return (
     <div className="flex align-center flex-dir-col home">
