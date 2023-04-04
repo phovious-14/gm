@@ -286,7 +286,7 @@ h3 {
   color: #fff;
   background-color: #3d3d3d;
   border-radius: 16px 16px 16px 0;
-
+  overflow-wrap: break-word;
 }
 
 .own {
