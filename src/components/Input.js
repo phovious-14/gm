@@ -9,8 +9,16 @@ const Input = ({
   setNewValue,
   placeholder,
   sendNewMessage,
-}) => (
-  <div
+}) =>{ 
+  
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    console.log('form submitted ✅');
+  };
+
+  return (
+  <form onSubmit={handleSubmit}
     style={{
       display: "flex",
       alignItems: "center",
@@ -37,10 +45,10 @@ const Input = ({
       className="text-input"
       placeholder={placeholder}
     />
-    <button className="send_btn" onClick={sendNewMessage}>
+    <button className="send_btn" type="submit" onClick={sendNewMessage}>
       <i class="bx bx-send"></i>
     </button>
-  </div>
-);
+  </form>
+)};
 
 export default Input;
